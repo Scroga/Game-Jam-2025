@@ -1,56 +1,87 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LightsController : MonoBehaviour
 {
     [SerializeField]
     private List<GameObject> lights = new();
-    [SerializeField]
-    private float duration = 0.8f;
-    public bool IsBlinkingMode = false;
-    void Start()
+
+    public float Duration = 0.8f;
+
+    private bool isBlinkingMode = false;
+    private const float blinkingDuration = 0.4f;
+    private const float alternatingDuration = 0.2f;
+
+    private void Start()
     {
-        foreach (var light in lights) {
-            light.SetActive(true);
-        }      
+        SetAll(true);
+        RestartRoutine();
     }
 
-    // Update is called once per frame
-    void Update()
+    private Coroutine running;
+
+    private void OnDisable()
     {
-        if (IsBlinkingMode)
+        if (running != null) StopCoroutine(running);
+        running = null;
+    }
+
+    public void SwitchMode() {
+        if (isBlinkingMode)
         {
-            StartCoroutine( BlinkingMode());
+            isBlinkingMode = false;
+            Duration = blinkingDuration;
         }
         else {
-            StartCoroutine(AlternatingFlashing());
+            isBlinkingMode = true;
+            Duration = alternatingDuration;
+        }
+        RestartRoutine();
+    }
+
+    private void RestartRoutine()
+    {
+        if (!isActiveAndEnabled) return;
+
+        if (running != null) StopCoroutine(running);
+        running = StartCoroutine(isBlinkingMode ? BlinkingModeLoop() : AlternatingFlashingLoop());
+    }
+
+    private void SetAll(bool active)
+    {
+        foreach (var light in lights)
+            if (light != null) light.SetActive(active);
+    }
+
+    private IEnumerator AlternatingFlashingLoop()
+    {
+        while (!isBlinkingMode)
+        {
+            SetAll(true);
+            yield return new WaitForSecondsRealtime(Duration);
+
+            SetAll(false);
+            yield return new WaitForSecondsRealtime(Duration);
         }
     }
 
-    private IEnumerator AlternatingFlashing() {
-        foreach (var light in lights)
+    private IEnumerator BlinkingModeLoop()
+    {
+        SetAll(false);
+
+        int i = 0;
+        while (isBlinkingMode)
         {
-            light.SetActive(true);
-        }
-        yield return new WaitForSecondsRealtime(duration);
+            int j = (i - 1 + lights.Count) % lights.Count;
 
-        foreach (var light in lights)
-        {
-            light.SetActive(false);
-        }
-    }
+            if (lights[i] != null) lights[i].SetActive(false);
+            if (lights[j] != null) lights[j].SetActive(true);
 
-    private IEnumerator BlinkingMode() {
-        for (int i = 0; i < lights.Count; i++) {
-            int j = i - 1;
-            j = j < 0 ? lights.Count - j : j;
-
-            lights[i].SetActive(false);
-            lights[j].SetActive(true);
-
-            yield return new WaitForSecondsRealtime(duration);
+            i = (i + 1) % lights.Count;
+            yield return new WaitForSecondsRealtime(Duration);
         }
     }
 }

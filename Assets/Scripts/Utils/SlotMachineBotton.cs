@@ -9,6 +9,9 @@ public class SlotMachineBotton : MonoBehaviour
     private Camera _camera;
 
     [SerializeField]
+    private LightsController _lightsController;
+
+    [SerializeField]
     private UnityEvent action;
 
     [SerializeField]
@@ -30,6 +33,7 @@ public class SlotMachineBotton : MonoBehaviour
     private void Awake()
     {
         _camera = Camera.main;
+
         light.SetActive(true);
         _sprite = GetComponent<SpriteRenderer>();
         _original = _sprite.color;
@@ -54,6 +58,9 @@ public class SlotMachineBotton : MonoBehaviour
 
     public void Activate() {
         if (isActive) return;
+
+        _lightsController.SwitchMode();
+
         isActive = true;
         light.SetActive(true);
         Transition(DeactivatedColor, _original);
@@ -61,6 +68,9 @@ public class SlotMachineBotton : MonoBehaviour
 
     public void Deactivate() {
         if (!isActive) return;
+
+        _lightsController.SwitchMode();
+
         isActive = false;
         light.SetActive(false);
         Transition(_original, DeactivatedColor);
