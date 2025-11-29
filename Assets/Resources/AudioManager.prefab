@@ -41,7 +41,7 @@ AudioSource:
   m_GameObject: {fileID: 935944238721833248}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -6404440881104564183, guid: a6cf90606a507d847ac2d0739ef8b515, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -169,7 +169,7 @@ AudioSource:
   m_GameObject: {fileID: 1823052796555237696}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 9195831737469405754, guid: a6cf90606a507d847ac2d0739ef8b515, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -305,7 +305,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f66f71945878fc54f95a99b25f7d70a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundEffects: []
+  soundEffects:
+  - groupID: Button_Sci-Fi
+    clips:
+    - {fileID: 8300000, guid: 7b21b50f27a95224fa10e8f962ae17af, type: 3}
+  - groupID: ButtonClick_Sci-Fi
+    clips:
+    - {fileID: 8300000, guid: 3eab95774fe317a489c29e1075d3d6a2, type: 3}
 --- !u!114 &6853231739459731816
 MonoBehaviour:
   m_ObjectHideFlags: 0

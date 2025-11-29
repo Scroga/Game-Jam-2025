@@ -30,7 +30,7 @@ public class LevelManager : SmartSingleton<LevelManager>
 
         yield return transition.AnimateTransitionIn();
 
-        progressBar.gameObject.SetActive(true);
+        //progressBar.gameObject.SetActive(true);
 
         do
         {
@@ -39,7 +39,7 @@ public class LevelManager : SmartSingleton<LevelManager>
         } while (scene.progress < 0.9f);
 
         scene.allowSceneActivation = true;
-        progressBar.gameObject.SetActive(false);
+        //progressBar.gameObject.SetActive(false);
 
         yield return transition.AnimateTransitionOut();
 
