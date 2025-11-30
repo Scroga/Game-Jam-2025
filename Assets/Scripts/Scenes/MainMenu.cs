@@ -15,12 +15,12 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         LoadVolume();
-        //MusicManager.Instance.PlayMusic("MainMenu");
+        MusicManager.Instance.PlayMusic("Menu");
     }
     public void Play()
     {
         LevelManager.Instance.LoadScene("Game", "CircleWipe");
-        //MusicManager.Instance.PlayMusic("Game");
+        MusicManager.Instance.StopMusic();
     }
     public void Quit()
     {

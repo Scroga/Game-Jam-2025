@@ -32,4 +32,29 @@ public class MusicManager : SmartSingleton<MusicManager>
             yield return null;
         }
     }
+
+    Coroutine musicRoutine;
+
+    public void StopMusic(float fadeDuration = 0.5f)
+    {
+        if (musicRoutine != null) StopCoroutine(musicRoutine);
+        musicRoutine = StartCoroutine(FadeOutAndStop(fadeDuration));
+    }
+
+    IEnumerator FadeOutAndStop(float fadeDuration)
+    {
+        float startVol = musicSource.volume;
+        float t = 0f;
+
+        while (t < fadeDuration)
+        {
+            t += Time.deltaTime;
+            musicSource.volume = Mathf.Lerp(startVol, 0f, t / fadeDuration);
+            yield return null;
+        }
+
+        musicSource.Stop();
+        musicSource.clip = null;   
+        musicSource.volume = startVol;
+    }
 }

@@ -20,7 +20,7 @@ public class BouncyEnter : MonoBehaviour
     public void Play()
     {
         DOTween.Kill(target);
-
+        MusicManager.Instance.PlayMusic("Game");
         Vector3 targetPos = target.position;
         Vector3 startPos = targetPos + fromOffset;
 

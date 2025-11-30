@@ -98,39 +98,39 @@ public class SlotController : MonoBehaviour
     {
         float heartPosition = -22.0f;
 
-        if (IsInRange(heartPosition + (_positionStep * (int)SlotType.HEART), transform.localPosition.y))
+        if (IsInRange(heartPosition + (_positionStep * 0), transform.localPosition.y))
         {
             stoppedSlot = SlotType.HEART;
         }
-        else if (IsInRange(heartPosition + (_positionStep * (int)SlotType.SPADE), transform.localPosition.y))
+        else if (IsInRange(heartPosition + (_positionStep * 1), transform.localPosition.y))
         {
             stoppedSlot = SlotType.SPADE;
         }
-        else if (IsInRange(heartPosition + (_positionStep * (int)SlotType.QUESTION), transform.localPosition.y))
-        {
-            stoppedSlot = SlotType.QUESTION;
-        }
-        else if (IsInRange(heartPosition + (_positionStep * (int)SlotType.APPLE), transform.localPosition.y))
-        {
-            stoppedSlot = SlotType.APPLE;
-        }
-        else if (IsInRange(heartPosition + (_positionStep * (int)SlotType.SEVEN), transform.localPosition.y))
-        {
-            stoppedSlot = SlotType.SEVEN;
-        }
-        else if (IsInRange(heartPosition + (_positionStep * (int)SlotType.DOLLAR), transform.localPosition.y))
-        {
-            stoppedSlot = SlotType.DOLLAR;
-        }
-        else if (IsInRange(heartPosition + (_positionStep * (int)SlotType.LEMON), transform.localPosition.y))
-        {
-            stoppedSlot = SlotType.LEMON;
-        }
-        else if (IsInRange(heartPosition + (_positionStep * (int)SlotType.BAR), transform.localPosition.y))
+        else if (IsInRange(heartPosition + (_positionStep * 2), transform.localPosition.y))
         {
             stoppedSlot = SlotType.BAR;
         }
-        else if (IsInRange(heartPosition + (_positionStep * ((int)SlotType.BAR + 1)), transform.localPosition.y))
+        else if (IsInRange(heartPosition + (_positionStep * 3), transform.localPosition.y))
+        {
+            stoppedSlot = SlotType.LEMON;
+        }
+        else if (IsInRange(heartPosition + (_positionStep * 4), transform.localPosition.y))
+        {
+            stoppedSlot = SlotType.HEART;
+        }
+        else if (IsInRange(heartPosition + (_positionStep * 5), transform.localPosition.y))
+        {
+            stoppedSlot = SlotType.DOLLAR;
+        }
+        else if (IsInRange(heartPosition + (_positionStep * 6), transform.localPosition.y))
+        {
+            stoppedSlot = SlotType.SEVEN;
+        }
+        else if (IsInRange(heartPosition + (_positionStep * 7), transform.localPosition.y))
+        {
+            stoppedSlot = SlotType.LEMON;
+        }
+        else if (IsInRange(heartPosition + (_positionStep * 8), transform.localPosition.y))
         {
             stoppedSlot = SlotType.HEART;
         }

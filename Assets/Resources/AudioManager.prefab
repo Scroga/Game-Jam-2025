@@ -312,6 +312,9 @@ MonoBehaviour:
   - groupID: ButtonClick_Sci-Fi
     clips:
     - {fileID: 8300000, guid: 3eab95774fe317a489c29e1075d3d6a2, type: 3}
+  - groupID: Money
+    clips:
+    - {fileID: 8300000, guid: fdbfa8ccb73f2ab46a972401a52d059a, type: 3}
 --- !u!114 &6853231739459731816
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,7 +342,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b522db4f511a75a4cace2cff22a0f26a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tracks: []
+  tracks:
+  - trackName: Menu
+    clip: {fileID: 8300000, guid: 060a42b5209381848bee0beb7d90346a, type: 3}
+  - trackName: Game
+    clip: {fileID: 8300000, guid: 3cf3530050ab2054880efeb78bb30fad, type: 3}
 --- !u!114 &9008189362875512355
 MonoBehaviour:
   m_ObjectHideFlags: 0

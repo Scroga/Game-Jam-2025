@@ -22,7 +22,6 @@ public class PlaySettings : MonoBehaviour
     {
         SettingsCanvas.SetActive(false);
         LoadVolume();
-        //MusicManager.Instance.PlayMusic("MainMenu");
     }
 
     public void OnPause() {
@@ -37,14 +36,13 @@ public class PlaySettings : MonoBehaviour
     }
 
     public void TogglePause() {
-        Time.timeScale = IsPaused ? 0.0f : 1.0f;
         if (IsPaused) OffPause();
         else OnPause();
         IsPaused = !IsPaused;
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetKeyDown(KeyCode.Tab)) {
             TogglePause();
         }
     }
@@ -54,7 +52,6 @@ public class PlaySettings : MonoBehaviour
         if (IsPaused)
         {
             IsPaused = false;
-            Time.timeScale = 1f;
         }
     }
 
@@ -70,6 +67,7 @@ public class PlaySettings : MonoBehaviour
 
     public void Exit() {
         LevelManager.Instance.LoadScene("Menu", "CircleWipe");
+        MusicManager.Instance.PlayMusic("Menu");
     }
 
     public void SaveSettings()
