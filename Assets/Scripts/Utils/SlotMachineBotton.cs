@@ -48,11 +48,8 @@ public class SlotMachineBotton : MonoBehaviour
 
         if (hit != null && hit.attachedRigidbody == GetComponent<Rigidbody2D>())
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                action.Invoke();
-                OnClick();
-            }
+            OnClick();
+            action.Invoke();
         }
     }
 
@@ -90,7 +87,7 @@ public class SlotMachineBotton : MonoBehaviour
             t += Time.deltaTime;
             float a = Mathf.Clamp01(t / duration);
             _sprite.color = Color.Lerp(from, to, a);
-            yield return null; // wait next frame
+            yield return null;
         }
         _sprite.color = to;
     }

@@ -5,12 +5,12 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class SlotController : MonoBehaviour
 {
     [SerializeField]
-    private float _initialPosition = -2.7f;
+    private float _initialPosition;
 
-    private float _positionStep = 4.35f;
+    private float _positionStep = 4.85f;
 
-    private const float _startPosition = 15.5f;
-    private const float _endPosition = -18.5f;
+    private const float _startPosition = 18.2f;
+    private const float _endPosition = -20.5f;
 
     private const float _timeInterval = 0.01f; // time between shifts of row positions
     private const float _rotationSpeed = 1.2f;
@@ -23,15 +23,15 @@ public class SlotController : MonoBehaviour
     void Start()
     {
         rowStopped = true;
-        _initialPosition = UnityEngine.Random.Range(_startPosition, _endPosition);
+        _initialPosition = UnityEngine.Random.Range(_endPosition, _startPosition);
         SetYPos(_initialPosition);
     }
 
     private void SetYPos(float value)
     {
-        var pos = transform.position;
+        var pos = transform.localPosition;
         pos.y = value;
-        transform.position = pos;
+        transform.localPosition = pos;
     }
 
     public void StartRotating()
@@ -57,11 +57,11 @@ public class SlotController : MonoBehaviour
         float rotatinsSpeed = _rotationSpeed * (randomSpeed / 10.0f);
         while (rotatinsSpeed > 0.05f)
         {
-            if (transform.position.y <= _endPosition)
+            if (transform.localPosition.y <= _endPosition)
             {
                 SetYPos(_startPosition);
             }
-            SetYPos(transform.position.y - rotatinsSpeed);
+            SetYPos(transform.localPosition.y - rotatinsSpeed);
             rotatinsSpeed *= 1 - (randomSpeedFactor / rotatingDuration);
 
             yield return new WaitForSecondsRealtime(_timeInterval);
@@ -76,12 +76,12 @@ public class SlotController : MonoBehaviour
 
         while (true)
         {
-            if (transform.position.y <= _endPosition)
+            if (transform.localPosition.y <= _endPosition)
             {
                 SetYPos(_startPosition);
             }
-            SetYPos(transform.position.y - _positionStep);
-            Debug.Log(transform.position.y);
+            SetYPos(transform.localPosition.y - _positionStep);
+            Debug.Log(transform.localPosition.y);
             yield return new WaitForSecondsRealtime(timeInterval);
         }
         SetCurrentSlot();
@@ -96,41 +96,41 @@ public class SlotController : MonoBehaviour
 
     private void SetCurrentSlot()
     {
-        float heartPosition = -19.3f;
+        float heartPosition = -22.0f;
 
-        if (IsInRange(heartPosition + (_positionStep * (int)SlotType.HEART), transform.position.y))
+        if (IsInRange(heartPosition + (_positionStep * (int)SlotType.HEART), transform.localPosition.y))
         {
             stoppedSlot = SlotType.HEART;
         }
-        else if (IsInRange(heartPosition + (_positionStep * (int)SlotType.SPADE), transform.position.y))
+        else if (IsInRange(heartPosition + (_positionStep * (int)SlotType.SPADE), transform.localPosition.y))
         {
             stoppedSlot = SlotType.SPADE;
         }
-        else if (IsInRange(heartPosition + (_positionStep * (int)SlotType.QUESTION), transform.position.y))
+        else if (IsInRange(heartPosition + (_positionStep * (int)SlotType.QUESTION), transform.localPosition.y))
         {
             stoppedSlot = SlotType.QUESTION;
         }
-        else if (IsInRange(heartPosition + (_positionStep * (int)SlotType.APPLE), transform.position.y))
+        else if (IsInRange(heartPosition + (_positionStep * (int)SlotType.APPLE), transform.localPosition.y))
         {
             stoppedSlot = SlotType.APPLE;
         }
-        else if (IsInRange(heartPosition + (_positionStep * (int)SlotType.SEVEN), transform.position.y))
+        else if (IsInRange(heartPosition + (_positionStep * (int)SlotType.SEVEN), transform.localPosition.y))
         {
             stoppedSlot = SlotType.SEVEN;
         }
-        else if (IsInRange(heartPosition + (_positionStep * (int)SlotType.DOLLAR), transform.position.y))
+        else if (IsInRange(heartPosition + (_positionStep * (int)SlotType.DOLLAR), transform.localPosition.y))
         {
             stoppedSlot = SlotType.DOLLAR;
         }
-        else if (IsInRange(heartPosition + (_positionStep * (int)SlotType.LEMON), transform.position.y))
+        else if (IsInRange(heartPosition + (_positionStep * (int)SlotType.LEMON), transform.localPosition.y))
         {
             stoppedSlot = SlotType.LEMON;
         }
-        else if (IsInRange(heartPosition + (_positionStep * (int)SlotType.BAR), transform.position.y))
+        else if (IsInRange(heartPosition + (_positionStep * (int)SlotType.BAR), transform.localPosition.y))
         {
             stoppedSlot = SlotType.BAR;
         }
-        else if (IsInRange(heartPosition + (_positionStep * ((int)SlotType.BAR + 1)), transform.position.y))
+        else if (IsInRange(heartPosition + (_positionStep * ((int)SlotType.BAR + 1)), transform.localPosition.y))
         {
             stoppedSlot = SlotType.HEART;
         }
